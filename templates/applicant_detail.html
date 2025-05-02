@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>応募者詳細</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+    <h2>👤 応募者詳細</h2>
+
+    <p><strong>名前:</strong> {{ applicant.name }}</p>
+    <p><strong>メール:</strong> {{ applicant.email }}</p>
+    <p><strong>応募日:</strong> {{ applicant.apply_date }}</p>
+    <p><strong>志望動機:</strong> {{ applicant.message }}</p>
+
+    <form method="POST">
+        <div class="mb-3">
+            <label for="status" class="form-label">ステータス</label>
+            <select name="status" class="form-select">
+                <option value="選考中" {% if applicant.status == '選考中' %}selected{% endif %}>選考中</option>
+                <option value="面接予定" {% if applicant.status == '面接予定' %}selected{% endif %}>面接予定</option>
+                <option value="採用" {% if applicant.status == '採用' %}selected{% endif %}>採用</option>
+                <option value="不採用" {% if applicant.status == '不採用' %}selected{% endif %}>不採用</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="memo" class="form-label">メモ</label>
+            <textarea name="memo" class="form-control">{{ applicant.memo }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">更新する</button>
+        <a href="/applicants" class="btn btn-secondary">戻る</a>
+    </form>
+</body>
+</html>
